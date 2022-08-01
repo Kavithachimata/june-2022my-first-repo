@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "f85d4666-e1aa-4ed9-a873-94216027afec",
+		"name": "Dummy APIs E2Etests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Delete an employee record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//status check\r",
+							"pm.test(\"Status code check\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//check delete response key value pair\r",
+							"pm.test(\"check delete response key value pair\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"    pm.expect(jsonData.data).to.eql(\"employeID\");\r",
+							"    pm.expect(jsonData.message).to.eql(\"successfully record has been deleted\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/delete/{{employeID}}",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"{{employeID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an employee record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//status check\r",
+							"pm.test(\"Status code check\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//key value points check\r",
+							"pm.test(\"response key value pair chek and validate if the age has been updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"   \r",
+							"  //Name check\r",
+							"    pm.expect(jsonData.data.name).to.eql(\"Kavitha\");\r",
+							"\r",
+							"    //Salary check\r",
+							"     pm.expect(jsonData.data.salary).to.eql(\"100000\");\r",
+							"\r",
+							"     //Age check\r",
+							"      pm.expect(jsonData.data.age).to.eql(\"30\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Kavitha\",\r\n    \"salary\": \"100000\",\r\n    \"age\": \"30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/update/{{employeID}}",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"{{employeID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new record in database",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Assertion 1: Status code check\r",
+							"pm.test(\"Status code check\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//Assertion 2: Response value check\r",
+							"pm.test(\"check if the response conatains expected name\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Kavitha\");\r",
+							"});\r",
+							"\r",
+							"//Assertion 2: Response salary check\r",
+							"pm.test(\"check if the response contains expected salry\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"100000\");\r",
+							"});\r",
+							"\r",
+							"//Assertion 4: check the key value pairs in the reponse\r",
+							"pm.test(\"check the key value pairs in the reponse\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    //Name check\r",
+							"    pm.expect(jsonData.data.name).to.eql(\"Kavitha\");\r",
+							"\r",
+							"    //Salary check\r",
+							"     pm.expect(jsonData.data.salary).to.eql(\"100000\");\r",
+							"\r",
+							"     //Age check\r",
+							"           pm.expect(jsonData.data.age).to.eql(\"25\");\r",
+							"});\r",
+							"\r",
+							"//set employe ID as a employe variable\r",
+							"pm.test(\"set employe ID as a employe variable\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"100000\");\r",
+							"pm.environment.set(\"employeID\", \"jasonData.data.id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Kavitha\",\r\n    \"salary\": \"100000\",\r\n    \"age\": \"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/create",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
