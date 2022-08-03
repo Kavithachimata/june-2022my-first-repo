@@ -45,7 +45,7 @@
           </elementProp>
           <stringProp name="HTTPSampler.domain">www.ebay.com.au</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/sch/i.html?_from=R40&amp;_trksid=p2380057.m570.l2632&amp;_nkw=macbook&amp;_sacat=175672</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
